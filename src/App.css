@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root{
+  --primary-color: #1E4225;
+  --secondary-color: #FFC53A;
+  --white: #FFFFFF;
+  --black: #000000;
+  --gray: #F4F4F4;
+  --font-archivo: 'Archivo Black', sans-serif;
+  --font-work-sans: 'Work Sans', sans-serif;
+}
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+body {
+  font-family: var(--font-work-sans);
+  background-color: var(--white);
+  color: #1a1a1a;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
