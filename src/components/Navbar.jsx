@@ -205,7 +205,7 @@ const courseCategories = [
       {
         name: "Data Analytics Internship",
         desc: "Gain practical data analytics experience",
-        badge: "Internship"
+        badge: ""
       },
       {
         name: "Data Science / Machine Learning Training",
@@ -220,7 +220,7 @@ const courseCategories = [
       {
         name: "Advanced Cybersecurity",
         desc: "Master advanced cybersecurity concepts",
-        badge: "Advanced"
+        badge: ""
       },
       {
         name: "Cybersecurity Internship",
@@ -230,7 +230,7 @@ const courseCategories = [
       {
         name: "Python and AI Internship",
         desc: "Build projects with Python and AI",
-        badge: "Internship"
+        badge: ""
       }
     ]
   },
