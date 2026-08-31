@@ -320,9 +320,9 @@ const Navbar = () => {
     };
   }, [megaMenuOpen]);
 
-  // Prevent background scrolling when mobile menu is open
+  // Prevent background scrolling when mobile menu OR desktop mega menu is open
   useEffect(() => {
-    if (mobileMenuOpen) {
+    if (mobileMenuOpen || megaMenuOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "unset";
@@ -330,7 +330,8 @@ const Navbar = () => {
     return () => {
       document.body.style.overflow = "unset";
     };
-  }, [mobileMenuOpen]);
+  }, [mobileMenuOpen, megaMenuOpen]);
+
 
   const closeAllMenus = () => {
     setMegaMenuOpen(false);
@@ -422,7 +423,7 @@ const Navbar = () => {
 
         {/* Right CTA / Mobile Toggle */}
         <div className="navbar-actions">
-          <Link to="/enroll" className="enroll-btn desktop-enroll-btn" onClick={closeAllMenus}>
+          <Link to="/enroll" className="enroll-btn desktop-enroll-btn btn-effect" onClick={closeAllMenus}>
             ENROLL AND START NOW
           </Link>
 
@@ -456,16 +457,19 @@ const Navbar = () => {
                         onClick={closeAllMenus}
                       >
                         <div className="mega-item-name-row">
-                          <span className="mega-item-name">{item.name}</span>
-                          {item.badge && (
-                            <span className={`mega-badge ${item.badge.toLowerCase().replace(/\s+/g, "-")}`}>
-                              {item.badge}
-                            </span>
-                          )}
+                          <span className="mega-item-name">
+                            {item.name}
+                            {item.badge && (
+                              <span className={`mega-badge ${item.badge.toLowerCase().replace(/\s+/g, "-")}`}>
+                                {item.badge}
+                              </span>
+                            )}
+                          </span>
                         </div>
                         <p className="mega-item-desc">{item.desc}</p>
                       </Link>
                     ))}
+
                   </div>
                 </div>
               ))}

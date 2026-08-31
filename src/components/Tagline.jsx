@@ -9,7 +9,7 @@ const Tagline = () => {
         <span className="tagline-text">
           Generate e-Certificate of Successfully Completion – Industry Visit at Sailors Academy
         </span>
-        <Link to="/certificate" className="tagline-btn">
+        <Link to="/certificate" className="tagline-btn btn-effect">
           Get Your Certificate
         </Link>
       </div>

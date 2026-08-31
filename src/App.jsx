@@ -2,9 +2,10 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
 import Tagline from "./components/Tagline";
+import Footer from "./components/Footer";
 import "./App.css";
-function App() {
 
+function App() {
   return (
     <>
       <Router>
@@ -13,9 +14,11 @@ function App() {
         <Routes>
           <Route path="/" exact element={<Home />} />
         </Routes>
+        <Footer />
       </Router>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
+
