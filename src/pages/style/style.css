@@ -1055,8 +1055,9 @@
 
 .marquee-card {
   flex-shrink: 0;
-  width: 480px;
-  height: 320px;
+  width: 560px;
+  aspect-ratio: 16 / 9;
+  height: auto;
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12);
@@ -1087,8 +1088,10 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   display: block;
 }
+
 
 /* ==========================================================================
    7. NEWS & ACADEMIC EVENTS SECTION
@@ -1156,11 +1159,12 @@
   background-color: #f8fafc;
   border: 1px solid #eef2f6;
   border-radius: 14px;
-  padding: 34px 30px;
+  padding: 0;
   display: flex;
   flex-direction: column;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02);
   transition: all 0.3s ease;
+  overflow: hidden;
 }
 
 .news-card:hover {
@@ -1170,12 +1174,44 @@
   border-color: #e2e8f0;
 }
 
+.news-card-image-wrap {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  overflow: hidden;
+  position: relative;
+  background-color: #f1f5f9;
+  border-bottom: 1px solid #eef2f6;
+}
+
+.news-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.news-card:hover .news-card-img {
+  transform: scale(1.03);
+}
+
+
+.news-card-body {
+  padding: 28px 26px 30px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
 .news-card-header {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
   margin-bottom: 18px;
 }
+
 
 .news-number {
   font-family: var(--font-archivo);
@@ -1391,9 +1427,11 @@
   }
 
   .marquee-card {
-    width: 420px;
-    height: 290px;
+    width: 480px;
+    aspect-ratio: 16 / 9;
+    height: auto;
   }
+
 }
 
 /* 2. MINI DESKTOPS & LANDSCAPE TABLETS (Together) */
@@ -1480,9 +1518,11 @@
   }
 
   .marquee-card {
-    width: 360px;
-    height: 250px;
+    width: 420px;
+    aspect-ratio: 16 / 9;
+    height: auto;
   }
+
 
   .cta-title {
     font-size: 38px;
@@ -1613,9 +1653,11 @@ flex-wrap: wrap;
   }
 
   .marquee-card {
-    width: 320px;
-    height: 220px;
+    width: 380px;
+    aspect-ratio: 16 / 9;
+    height: auto;
   }
+
 
   .cta-banner-section {
     padding: 80px 0;
@@ -1922,9 +1964,11 @@ flex-wrap: wrap;
   }
 
   .marquee-card {
-    width: 280px;
-    height: 190px;
+    width: 310px;
+    aspect-ratio: 16 / 9;
+    height: auto;
   }
+
 
   .news-grid {
     grid-template-columns: 1fr;
@@ -1932,7 +1976,17 @@ flex-wrap: wrap;
   }
 
   .news-card {
-    padding: 24px 20px;
+    padding: 0;
+  }
+
+  .news-card-image-wrap {
+    aspect-ratio: 16 / 9;
+    height: auto;
+  }
+
+
+  .news-card-body {
+    padding: 22px 18px;
   }
 
   .news-number {
@@ -1942,6 +1996,7 @@ flex-wrap: wrap;
   .news-card-title {
     font-size: 16px;
   }
+
 
   .cta-banner-section {
     padding: 65px 0;
