@@ -11,8 +11,9 @@ import about1 from "../assets/about-sailor1.jpg";
 import about2 from "../assets/about-sailor2.jpg";
 import about3 from "../assets/about-sailor3.JPG";
 import about4 from "../assets/about-sailor4.jpg";
-import about5 from "../assets/about-sailor5.jpg";
+import about5 from "../assets/about-sailor5.JPG";
 import student1 from "../assets/student1.jpg";
+
 import student2 from "../assets/student2.jpg";
 import student3 from "../assets/student3.jpg";
 import news1 from "../assets/news1.jpg";
