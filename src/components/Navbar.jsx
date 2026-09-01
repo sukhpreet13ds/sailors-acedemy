@@ -628,7 +628,7 @@ const Navbar = () => {
                           {cat.items.map((sub, sIdx) => (
                             <Link
                               key={sIdx}
-                              to="/courses"
+                              to="/course"
                               className="mobile-subitem-link"
                               onClick={closeAllMenus}
                             >
