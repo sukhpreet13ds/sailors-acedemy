@@ -403,11 +403,11 @@ const Navbar = () => {
           </li>
           <li className="nav-item">
             <Link
-              to="/admission"
-              className={`nav-link ${location.pathname === "/admission" ? "active" : ""}`}
+              to="/scholarship"
+              className={`nav-link ${location.pathname === "/scholarship" ? "active" : ""}`}
               onClick={closeAllMenus}
             >
-              ADMISSION
+              SCHOLARSHIP
             </Link>
           </li>
           <li className="nav-item">
@@ -451,7 +451,7 @@ const Navbar = () => {
                   <div className="mega-items-list">
                     {col.items.map((item, iIdx) => (
                       <Link
-                        to="/courses"
+                        to="/course"
                         key={iIdx}
                         className="mega-item-link"
                         onClick={closeAllMenus}
@@ -486,7 +486,7 @@ const Navbar = () => {
                 className="mega-footer-explore"
                 onClick={closeAllMenus}
               >
-                <span>View All 30+ Certified Programs</span>
+                <span>Explore All Courses</span>
                 <FontAwesomeIcon icon={faArrowRight} />
               </Link>
             </div>
@@ -658,17 +658,17 @@ const Navbar = () => {
               )}
             </div>
 
-            {/* Admission */}
+            {/* Scholarship */}
             <Link
-              to="/admission"
-              className={`mobile-nav-item ${location.pathname === "/admission" ? "active" : ""}`}
+              to="/scholarship"
+              className={`mobile-nav-item ${location.pathname === "/scholarship" ? "active" : ""}`}
               onClick={closeAllMenus}
             >
               <div className="mobile-item-left">
                 <div className="mobile-icon-box">
                   <FontAwesomeIcon icon={faUserGraduate} />
                 </div>
-                <span className="mobile-item-label">Admission & Eligibility</span>
+                <span className="mobile-item-label">Scholarship</span>
               </div>
             </Link>
 

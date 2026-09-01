@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
@@ -16,10 +16,17 @@ import student1 from "../assets/student1.jpg";
 
 import student2 from "../assets/student2.jpg";
 import student3 from "../assets/student3.jpg";
+import course1 from "../assets/course1.jpg";
+import course2 from "../assets/course2.jpg";
+import course3 from "../assets/course3.jpg";
+import course4 from "../assets/course4.jpg";
+import course5 from "../assets/course5.jpg";
+import course6 from "../assets/course6.jpg";
+import course7 from "../assets/course7.jpg";
+import course8 from "../assets/course8.jpg";
 import news1 from "../assets/news1.jpg";
 import news2 from "../assets/news2.jpg";
 import news3 from "../assets/news3.jpg";
-import sailorCtaImg from "../assets/sailor-cta.jpg";
 import EnquiryForm from "../components/EnquiryForm";
 import FoldText from "../components/FoldText";
 import "./style/style.css";
@@ -67,6 +74,131 @@ const Home = () => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [aboutSlideIndex, setAboutSlideIndex] = useState(0);
     const [salaryCount, setSalaryCount] = useState(1);
+
+    // Marquee drag-to-scroll refs
+    const marqueeWrapRef = useRef(null);
+    const marqueeTrackRef = useRef(null);
+    const isDragging = useRef(false);
+    const dragStartX = useRef(0);
+    const dragScrollLeft = useRef(0);
+    const autoScrollResumeTimer = useRef(null);
+    const manualOffset = useRef(0);
+    const rafId = useRef(null);
+    const autoRunning = useRef(true);
+    const lastTimestamp = useRef(null);
+    const SPEED = 80; // pixels per second for auto scroll
+
+    // Auto-scroll loop using requestAnimationFrame
+    const autoScrollLoop = useCallback((timestamp) => {
+        if (!autoRunning.current || !marqueeTrackRef.current) return;
+        if (lastTimestamp.current !== null) {
+            const delta = (timestamp - lastTimestamp.current) / 1000;
+            const track = marqueeTrackRef.current;
+            const totalWidth = track.scrollWidth / 2; // duplicated content
+            manualOffset.current = (manualOffset.current + SPEED * delta) % totalWidth;
+            track.style.transform = `translateX(-${manualOffset.current}px)`;
+        }
+        lastTimestamp.current = timestamp;
+        rafId.current = requestAnimationFrame(autoScrollLoop);
+    }, []);
+
+    const stopAutoScroll = useCallback(() => {
+        autoRunning.current = false;
+        lastTimestamp.current = null;
+        if (rafId.current) cancelAnimationFrame(rafId.current);
+    }, []);
+
+    const startAutoScroll = useCallback(() => {
+        autoRunning.current = true;
+        lastTimestamp.current = null;
+        rafId.current = requestAnimationFrame(autoScrollLoop);
+    }, [autoScrollLoop]);
+
+    useEffect(() => {
+        const wrapper = marqueeWrapRef.current;
+        const track = marqueeTrackRef.current;
+        if (!wrapper || !track) return;
+
+        // Disable CSS animation — we drive it via RAF
+        track.style.animation = 'none';
+        track.style.willChange = 'transform';
+        startAutoScroll();
+
+        const onMouseDown = (e) => {
+            isDragging.current = true;
+            dragStartX.current = e.clientX;
+            dragScrollLeft.current = manualOffset.current;
+            stopAutoScroll();
+            if (autoScrollResumeTimer.current) clearTimeout(autoScrollResumeTimer.current);
+            wrapper.classList.add('grabbing');
+            e.preventDefault();
+        };
+
+        const onMouseMove = (e) => {
+            if (!isDragging.current) return;
+            const dx = dragStartX.current - e.clientX;
+            const totalWidth = track.scrollWidth / 2;
+            manualOffset.current = ((dragScrollLeft.current + dx) % totalWidth + totalWidth) % totalWidth;
+            track.style.transform = `translateX(-${manualOffset.current}px)`;
+        };
+
+        const onMouseUp = () => {
+            if (!isDragging.current) return;
+            isDragging.current = false;
+            wrapper.classList.remove('grabbing');
+            autoScrollResumeTimer.current = setTimeout(() => startAutoScroll(), 800);
+        };
+
+        const onMouseLeave = () => {
+            if (!isDragging.current) return;
+            isDragging.current = false;
+            wrapper.classList.remove('grabbing');
+            autoScrollResumeTimer.current = setTimeout(() => startAutoScroll(), 800);
+        };
+
+        // Touch events
+        const onTouchStart = (e) => {
+            isDragging.current = true;
+            dragStartX.current = e.touches[0].clientX;
+            dragScrollLeft.current = manualOffset.current;
+            stopAutoScroll();
+            if (autoScrollResumeTimer.current) clearTimeout(autoScrollResumeTimer.current);
+        };
+
+        const onTouchMove = (e) => {
+            if (!isDragging.current) return;
+            const dx = dragStartX.current - e.touches[0].clientX;
+            const totalWidth = track.scrollWidth / 2;
+            manualOffset.current = ((dragScrollLeft.current + dx) % totalWidth + totalWidth) % totalWidth;
+            track.style.transform = `translateX(-${manualOffset.current}px)`;
+            e.preventDefault();
+        };
+
+        const onTouchEnd = () => {
+            isDragging.current = false;
+            autoScrollResumeTimer.current = setTimeout(() => startAutoScroll(), 800);
+        };
+
+        wrapper.addEventListener('mousedown', onMouseDown);
+        window.addEventListener('mousemove', onMouseMove);
+        window.addEventListener('mouseup', onMouseUp);
+        wrapper.addEventListener('mouseleave', onMouseLeave);
+        wrapper.addEventListener('touchstart', onTouchStart, { passive: true });
+        wrapper.addEventListener('touchmove', onTouchMove, { passive: false });
+        wrapper.addEventListener('touchend', onTouchEnd);
+
+        return () => {
+            stopAutoScroll();
+            if (autoScrollResumeTimer.current) clearTimeout(autoScrollResumeTimer.current);
+            wrapper.removeEventListener('mousedown', onMouseDown);
+            window.removeEventListener('mousemove', onMouseMove);
+            window.removeEventListener('mouseup', onMouseUp);
+            wrapper.removeEventListener('mouseleave', onMouseLeave);
+            wrapper.removeEventListener('touchstart', onTouchStart);
+            wrapper.removeEventListener('touchmove', onTouchMove);
+            wrapper.removeEventListener('touchend', onTouchEnd);
+        };
+    }, [startAutoScroll, stopAutoScroll]);
 
     // IntersectionObserver to trigger animate__fadeInUp on scroll
     useEffect(() => {
@@ -303,41 +435,49 @@ const Home = () => {
 
             {/* 4. STATS METRICS COUNTER BAR */}
             <section className="stats-section">
-                <div className="stats-container">
-                    {/* Card 1 */}
-                    <div className="stat-pill-card scroll-reveal">
-                        <div className="stat-circle-badge">
-                            <span>83%</span>
-                        </div>
-                        <div className="stat-pill-text">
-                            <h3>EMPLOYMENT VELOCITY</h3>
-                            <Link to="/enroll" className="stat-enroll-link">Enroll Now</Link>
-                        </div>
-                    </div>
+    <div className="stats-container">
 
-                    {/* Card 2 */}
-                    <div className="stat-pill-card scroll-reveal">
-                        <div className="stat-circle-badge">
-                            <span>50+</span>
-                        </div>
-                        <div className="stat-pill-text">
-                            <h3>CURRICULUM MODULES</h3>
-                            <Link to="/enroll" className="stat-enroll-link">Enroll Now</Link>
-                        </div>
-                    </div>
+        {/* Card 1 */}
+        <div className="stat-pill-card scroll-reveal">
+            <div className="stat-circle-badge">
+                <span>83%</span>
+            </div>
+            <div className="stat-pill-text">
+                <h3>PLACEMENT SUCCESS RATE</h3>
+                <Link to="/enroll" className="stat-enroll-link">
+                    Enroll Now
+                </Link>
+            </div>
+        </div>
 
-                    {/* Card 3 */}
-                    <div className="stat-pill-card scroll-reveal">
-                        <div className="stat-circle-badge">
-                            <span>#1</span>
-                        </div>
-                        <div className="stat-pill-text">
-                            <h3>REGIONAL REPUTATION</h3>
-                            <Link to="/enroll" className="stat-enroll-link">Enroll Now</Link>
-                        </div>
-                    </div>
-                </div>
-            </section>
+        {/* Card 2 */}
+        <div className="stat-pill-card scroll-reveal">
+            <div className="stat-circle-badge">
+                <span>50+</span>
+            </div>
+            <div className="stat-pill-text">
+                <h3>INDUSTRY-READY MODULES</h3>
+                <Link to="/enroll" className="stat-enroll-link">
+                    Enroll Now
+                </Link>
+            </div>
+        </div>
+
+        {/* Card 3 */}
+        <div className="stat-pill-card scroll-reveal">
+            <div className="stat-circle-badge">
+                <span>#1</span>
+            </div>
+            <div className="stat-pill-text">
+                <h3>STUDENT-TRUSTED INSTITUTE</h3>
+                <Link to="/enroll" className="stat-enroll-link">
+                    Enroll Now
+                </Link>
+            </div>
+        </div>
+
+    </div>
+</section>
 
             {/* 5. ACADEMIC TRACKS / COURSES GRID SECTION */}
             <section className="academic-tracks-section">
@@ -349,93 +489,161 @@ const Home = () => {
                             <h2 className="tracks-title">Explore Our Core Academic Tracks</h2>
                         </div>
                         <Link to="/courses" className="brochure-download-btn btn-effect">
-                            Download Full Brochure
+                            Explore All
                         </Link>
                     </div>
 
-                    {/* 6 Tracks Cards Grid */}
+                    {/* 8 Tracks Cards Grid (4x4 layout) */}
                     <div className="tracks-grid">
                         {/* Card 1 */}
-                        <div className="track-card yellow-accent scroll-reveal">
-                            <h3 className="track-name">Cyber Security & Networks</h3>
-                            <p className="track-desc">
-                                Master defensive strategies, server hardened states, and structural threat analytics.
-                            </p>
-                            <div className="track-card-footer">
-                                <span className="track-price">Rs. 30,000</span>
-                                <Link to="/enroll" className="track-enroll-btn btn-effect">
-                                    Enroll Now
-                                </Link>
+                        <div className="track-card scroll-reveal">
+                            <div className="track-image-wrap">
+                                <img src={course1} alt="Cyber Security & Networks" className="track-img" />
+                            </div>
+                            <div className="track-content">
+                                <h3 className="track-name">Cyber Security & Networks</h3>
+                                <p className="track-desc">
+                                    Master defensive strategies, server hardened states, and structural threat analytics.
+                                </p>
+                                <div className="track-card-footer">
+                                    <span className="track-status-badge badge-demanded">In Demand</span>
+                                    <Link to="/enroll" className="track-enroll-btn btn-effect">
+                                        Enroll Now
+                                    </Link>
+                                </div>
                             </div>
                         </div>
 
                         {/* Card 2 */}
-                        <div className="track-card yellow-accent scroll-reveal">
-                            <h3 className="track-name">Performance Marketing</h3>
-                            <p className="track-desc">
-                                Direct client acquisition modeling, budget deployment strategies, and conversion tracking.
-                            </p>
-                            <div className="track-card-footer">
-                                <span className="track-price">Rs. 30,000</span>
-                                <Link to="/enroll" className="track-enroll-btn btn-effect">
-                                    Enroll Now
-                                </Link>
+                        <div className="track-card scroll-reveal">
+                            <div className="track-image-wrap">
+                                <img src={course2} alt="Performance Marketing" className="track-img" />
+                            </div>
+                            <div className="track-content">
+                                <h3 className="track-name">Performance Marketing</h3>
+                                <p className="track-desc">
+                                    Direct client acquisition modeling, budget deployment strategies, and conversion tracking.
+                                </p>
+                                <div className="track-card-footer">
+                                    <span className="track-status-badge badge-trending">Trending</span>
+                                    <Link to="/enroll" className="track-enroll-btn btn-effect">
+                                        Enroll Now
+                                    </Link>
+                                </div>
                             </div>
                         </div>
 
                         {/* Card 3 */}
-                        <div className="track-card yellow-accent scroll-reveal">
-                            <h3 className="track-name">Generative AI Integration</h3>
-                            <p className="track-desc">
-                                Leveraging core transformer pipelines to scale operational yield across corporate environments.
-                            </p>
-                            <div className="track-card-footer">
-                                <span className="track-price">Rs. 30,000</span>
-                                <Link to="/enroll" className="track-enroll-btn btn-effect">
-                                    Enroll Now
-                                </Link>
+                        <div className="track-card scroll-reveal">
+                            <div className="track-image-wrap">
+                                <img src={course3} alt="AI and Automation Professional Program" className="track-img" />
+                            </div>
+                            <div className="track-content">
+                                <h3 className="track-name">AI and Automation Professional Program</h3>
+                                <p className="track-desc">
+                                   Professional training in corporate AI strategies and workflow automation.
+                                </p>
+                                <div className="track-card-footer">
+                                    <span className="track-status-badge badge-popular">Most Popular</span>
+                                    <Link to="/enroll" className="track-enroll-btn btn-effect">
+                                        Enroll Now
+                                    </Link>
+                                </div>
                             </div>
                         </div>
 
                         {/* Card 4 */}
-                        <div className="track-card red-accent scroll-reveal">
-                            <h3 className="track-name">Social Media Management</h3>
-                            <p className="track-desc">
-                                Strategic brand positioning, distribution operations, and organic sentiment indexing.
-                            </p>
-                            <div className="track-card-footer">
-                                <span className="track-price">Rs. 30,000</span>
-                                <Link to="/enroll" className="track-enroll-btn btn-effect">
-                                    Enroll Now
-                                </Link>
+                        <div className="track-card scroll-reveal">
+                            <div className="track-image-wrap">
+                                <img src={course4} alt="Social Media Management" className="track-img" />
+                            </div>
+                            <div className="track-content">
+                                <h3 className="track-name">Social Media Management</h3>
+                                <p className="track-desc">
+                                    Strategic brand positioning, distribution operations, and organic sentiment indexing.
+                                </p>
+                                <div className="track-card-footer">
+                                    <span className="track-status-badge badge-seasonal">Seasonal</span>
+                                    <Link to="/enroll" className="track-enroll-btn btn-effect">
+                                        Enroll Now
+                                    </Link>
+                                </div>
                             </div>
                         </div>
 
                         {/* Card 5 */}
-                        <div className="track-card red-accent scroll-reveal">
-                            <h3 className="track-name">Video Production & AI Editing</h3>
-                            <p className="track-desc">
-                                Technical editing pipelines, compositing, and machine-assisted asset optimization.
-                            </p>
-                            <div className="track-card-footer">
-                                <span className="track-price">Rs. 30,000</span>
-                                <Link to="/enroll" className="track-enroll-btn btn-effect">
-                                    Enroll Now
-                                </Link>
+                        <div className="track-card scroll-reveal">
+                            <div className="track-image-wrap">
+                                <img src={course5} alt="Video Production & AI Editing" className="track-img" />
+                            </div>
+                            <div className="track-content">
+                                <h3 className="track-name">Video Production & AI Editing</h3>
+                                <p className="track-desc">
+                                    Technical editing pipelines, compositing, and machine-assisted asset optimization.
+                                </p>
+                                <div className="track-card-footer">
+                                    <span className="track-status-badge badge-trending">Trending</span>
+                                    <Link to="/enroll" className="track-enroll-btn btn-effect">
+                                        Enroll Now
+                                    </Link>
+                                </div>
                             </div>
                         </div>
 
                         {/* Card 6 */}
-                        <div className="track-card red-accent scroll-reveal">
-                            <h3 className="track-name">SEO & Data Discovery</h3>
-                            <p className="track-desc">
-                                Semantic search indexing, crawl architecture optimization, and competitive search modeling.
-                            </p>
-                            <div className="track-card-footer">
-                                <span className="track-price">Rs. 30,000</span>
-                                <Link to="/enroll" className="track-enroll-btn btn-effect">
-                                    Enroll Now
-                                </Link>
+                        <div className="track-card scroll-reveal">
+                            <div className="track-image-wrap">
+                                <img src={course6} alt="SEO & Data Discovery" className="track-img" />
+                            </div>
+                            <div className="track-content">
+                                <h3 className="track-name">SEO & Data Discovery</h3>
+                                <p className="track-desc">
+                                    Semantic search indexing, crawl architecture optimization, and competitive search modeling.
+                                </p>
+                                <div className="track-card-footer">
+                                    <span className="track-status-badge badge-demanded">In Demand</span>
+                                    <Link to="/enroll" className="track-enroll-btn btn-effect">
+                                        Enroll Now
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Card 7 */}
+                        <div className="track-card scroll-reveal">
+                            <div className="track-image-wrap">
+                                <img src={course7} alt="UI/UX Design with Figma" className="track-img" />
+                            </div>
+                            <div className="track-content">
+                                <h3 className="track-name">UI/UX Design with Figma</h3>
+                                <p className="track-desc">
+                                    Design intuitive interfaces, interactive prototypes, and industry-standard design systems.
+                                </p>
+                                <div className="track-card-footer">
+                                    <span className="track-status-badge badge-popular">Most Popular</span>
+                                    <Link to="/enroll" className="track-enroll-btn btn-effect">
+                                        Enroll Now
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Card 8 */}
+                        <div className="track-card scroll-reveal">
+                            <div className="track-image-wrap">
+                                <img src={course8} alt="Full Stack Web Development" className="track-img" />
+                            </div>
+                            <div className="track-content">
+                                <h3 className="track-name">Full Stack Web Development</h3>
+                                <p className="track-desc">
+                                    Build scalable modern web applications from frontend interfaces to powerful backend APIs.
+                                </p>
+                                <div className="track-card-footer">
+                                    <span className="track-status-badge badge-demanded">In Demand</span>
+                                    <Link to="/enroll" className="track-enroll-btn btn-effect">
+                                        Enroll Now
+                                    </Link>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -461,9 +669,9 @@ const Home = () => {
                     </div>
                 </div>
 
-                {/* Seamless Tilted Marquee Loop */}
-                <div className="marquee-wrapper scroll-reveal">
-                    <div className="marquee-track">
+                {/* Seamless Tilted Marquee Loop — drag/touch + auto-scroll */}
+                <div className="marquee-wrapper scroll-reveal" ref={marqueeWrapRef}>
+                    <div className="marquee-track" ref={marqueeTrackRef}>
                         {/* 1st set of 6 */}
                         {studentImages.map((img, idx) => (
                             <div key={`s1-${idx}`} className={`marquee-card tilt-${(idx % 3) + 1}`}>
@@ -554,34 +762,7 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* 8. ENTERPRISE POTENTIAL CTA SECTION */}
-            <section className="cta-banner-section">
-                {/* Background Image Container with Green Overlay */}
-                <div
-                    className="cta-bg-image"
-                    style={{ backgroundImage: `url(${sailorCtaImg})` }}
-                />
-                <div className="cta-overlay" />
-
-                <div className="cta-container scroll-reveal">
-                    <h2 className="cta-title">
-                        Secure Your Enterprise <br />
-                        Potential Today
-                    </h2>
-                    <p className="cta-desc">
-                        Enrollment is open for the upcoming cohort. Apply online or request
-                        detailed program schedules from our professional advisory team.
-                    </p>
-                    <div className="cta-buttons-row">
-                        <Link to="/enroll" className="cta-primary-btn btn-effect">
-                            Submit Admission Request
-                        </Link>
-                        <Link to="/courses" className="cta-outline-btn btn-effect">
-                            Download Brochure
-                        </Link>
-                    </div>
-                </div>
-            </section>
+            
         </>
     );
 };

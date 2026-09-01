@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import sailorCtaImg from "../assets/sailor-cta.jpg";
+
 import {
   faFacebookF,
   faTwitter,
@@ -9,9 +11,60 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import logoColorImg from "../assets/sailor-color-logo.png";
 import "./style/style.css";
+import "../pages/style/style.css";
 
 const Footer = () => {
+  // IntersectionObserver to trigger animate__fadeInUp on scroll for scroll-reveal elements in Footer/pages
+  useEffect(() => {
+    const observerCallback = (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("animate__animated", "animate__fadeInUp");
+          observer.unobserve(entry.target);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, {
+      threshold: 0.15,
+      rootMargin: "0px 0px -40px 0px"
+    });
+
+    const revealElements = document.querySelectorAll(".scroll-reveal");
+    revealElements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
   return (
+    <>
+    {/* 8. ENTERPRISE POTENTIAL CTA SECTION */}
+            <section className="cta-banner-section">
+                {/* Background Image Container with Green Overlay */}
+                <div
+                    className="cta-bg-image"
+                    style={{ backgroundImage: `url(${sailorCtaImg})` }}
+                />
+                <div className="cta-overlay" />
+
+                <div className="cta-container scroll-reveal">
+                    <h2 className="cta-title">
+                        Secure Your Enterprise <br />
+                        Potential Today
+                    </h2>
+                    <p className="cta-desc">
+                        Enrollment is open for the upcoming cohort. Apply online or request
+                        detailed program schedules from our professional advisory team.
+                    </p>
+                    <div className="cta-buttons-row">
+                        <Link to="/enroll" className="cta-primary-btn btn-effect">
+                            Submit Admission Request
+                        </Link>
+                        <Link to="/courses" className="cta-outline-btn btn-effect">
+                            Download Brochure
+                        </Link>
+                    </div>
+                </div>
+            </section>
     <footer className="main-footer">
       {/* Top Main Footer Section */}
       <div className="footer-top-container">
@@ -109,6 +162,7 @@ const Footer = () => {
         </div>
       </div>
     </footer>
+    </>
   );
 };
 
