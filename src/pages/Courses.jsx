@@ -493,7 +493,7 @@ const Courses = () => {
                                             ) : (
                                                 <span />
                                             )}
-                                            <Link to="/enroll" className="catalog-enroll-btn btn-effect">
+                                            <Link to="/course" className="catalog-enroll-btn btn-effect">
                                                 Enroll Now
                                             </Link>
                                         </div>

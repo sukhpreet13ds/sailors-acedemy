@@ -6,12 +6,14 @@ import Course from "./pages/Course";
 import Navbar from "./components/Navbar";
 import Tagline from "./components/Tagline";
 import Footer from "./components/Footer";
+import ScrollRestoration from "./components/ScrollRestoration";
 import "./App.css";
 
 function App() {
   return (
     <>
       <Router>
+        <ScrollRestoration />
         <Tagline />
         <Navbar />
         <Routes>
