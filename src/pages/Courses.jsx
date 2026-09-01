@@ -513,7 +513,7 @@ const Courses = () => {
                         <div className="courses-method-header-left">
                             <span className="courses-method-tag">THE SAILORS METHOD</span>
                             <h2 className="courses-method-title">
-                                Built differently for real<br />professional outcomes.
+                                Built differently for real professional outcomes.
                             </h2>
                         </div>
                         <p className="courses-method-header-desc">
