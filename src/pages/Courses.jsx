@@ -16,6 +16,12 @@ import course5 from "../assets/course5.jpg";
 import course6 from "../assets/course6.jpg";
 import course7 from "../assets/course7.jpg";
 import course8 from "../assets/course8.jpg";
+import real1 from "../assets/AI Agent and Automation.jpg";
+import real2 from "../assets/AI and Automation Professional Program.jpg";
+import real3 from "../assets/ChatGPT for Business.jpg";
+import real4 from "../assets/Generative AI & Prompt Engineering.jpg";
+import real5 from "../assets/Generative AI and Agentic AI Track.jpg";
+import real6 from "../assets/Prompt Engineering.jpg";
 import review1 from "../assets/review1.jpg";
 import review2 from "../assets/review2.avif";
 import review3 from "../assets/review3.jpg";
@@ -35,42 +41,48 @@ const courseCategoriesData = [
         desc: "Learn generative AI and prompt engineering to scale operational workflows.",
         badge: "New",
         duration: "8 Weeks",
-        lessons: "24 Lessons"
+        lessons: "24 Lessons",
+        image: real4
       },
       {
         name: "AI Agent and Automation",
         desc: "Build autonomous AI agents and automate business pipelines.",
         badge: "Trending",
         duration: "10 Weeks",
-        lessons: "30 Lessons"
+        lessons: "30 Lessons",
+        image: real1
       },
       {
         name: "AI and Automation Professional Program",
         desc: "Professional training in corporate AI strategies and workflow automation.",
         badge: "Most Popular",
         duration: "16 Weeks",
-        lessons: "48 Lessons"
+        lessons: "48 Lessons",
+        image: real2
       },
       {
         name: "Generative AI and Agentic AI Track",
         desc: "Master cutting-edge transformer models and multi-agent systems.",
         badge: "Advanced",
         duration: "12 Weeks",
-        lessons: "36 Lessons"
+        lessons: "36 Lessons",
+        image: real5
       },
       {
         name: "Prompt Engineering",
         desc: "Master structured prompts and context management for modern AI tools.",
         badge: "Popular",
         duration: "6 Weeks",
-        lessons: "18 Lessons"
+        lessons: "18 Lessons",
+        image: real6
       },
       {
         name: "ChatGPT for Business",
         desc: "Leverage ChatGPT for enterprise efficiency and content production.",
         badge: "Trending",
         duration: "4 Weeks",
-        lessons: "12 Lessons"
+        lessons: "12 Lessons",
+        image: real3
       }
     ]
   },
@@ -460,7 +472,7 @@ const Courses = () => {
                                 {/* Image */}
                                 <div className="catalog-card-img-wrap">
                                     <img
-                                        src={courseImages[idx % courseImages.length]}
+                                        src={course.image || courseImages[idx % courseImages.length]}
                                         alt={course.name}
                                         className="catalog-card-img"
                                     />

@@ -24,6 +24,8 @@ import course5 from "../assets/course5.jpg";
 import course6 from "../assets/course6.jpg";
 import course7 from "../assets/course7.jpg";
 import course8 from "../assets/course8.jpg";
+import real2 from "../assets/AI and Automation Professional Program.jpg";
+
 import news1 from "../assets/news1.jpg";
 import news2 from "../assets/news2.jpg";
 import news3 from "../assets/news3.jpg";
@@ -536,7 +538,7 @@ const Home = () => {
                         {/* Card 3 */}
                         <div className="track-card scroll-reveal">
                             <div className="track-image-wrap">
-                                <img src={course3} alt="AI and Automation Professional Program" className="track-img" />
+                                <img src={real2} alt="AI and Automation Professional Program" className="track-img" />
                             </div>
                             <div className="track-content">
                                 <h3 className="track-name">AI and Automation Professional Program</h3>
