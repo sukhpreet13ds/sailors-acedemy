@@ -320,15 +320,36 @@ const Navbar = () => {
     };
   }, [megaMenuOpen]);
 
+  const [isSticky, setIsSticky] = useState(false);
+
+  // Detect scroll to fix navbar at top when scrolled past Tagline
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 40) {
+        setIsSticky(true);
+      } else {
+        setIsSticky(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   // Prevent background scrolling when mobile menu OR desktop mega menu is open
   useEffect(() => {
     if (mobileMenuOpen || megaMenuOpen) {
+      const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
       document.body.style.overflow = "hidden";
+      if (scrollBarWidth > 0) {
+        document.body.style.paddingRight = `${scrollBarWidth}px`;
+      }
     } else {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = "";
+      document.body.style.paddingRight = "";
     }
     return () => {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = "";
+      document.body.style.paddingRight = "";
     };
   }, [mobileMenuOpen, megaMenuOpen]);
 
@@ -357,7 +378,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className="main-header">
+    <header className={`main-header ${isSticky ? "is-sticky" : ""}`}>
       <nav className="navbar-container">
         {/* Brand Logo Left */}
         <div className="navbar-brand">

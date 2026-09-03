@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { faChevronLeft, faChevronRight, faClock, faBookOpen } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import sailor1 from "../assets/sailor1.JPG";
 import sailor2 from "../assets/sailor2.JPG";
@@ -507,6 +507,24 @@ const Home = () => {
                                 <p className="track-desc">
                                     Master defensive strategies, server hardened states, and structural threat analytics.
                                 </p>
+                                <div className="catalog-card-meta-block">
+                                    <div className="catalog-meta-top-row">
+                                        <div className="catalog-info-item">
+                                            <FontAwesomeIcon icon={faClock} className="catalog-info-icon" />
+                                            <span>16 Weeks</span>
+                                        </div>
+                                        <span className="catalog-meta-dot">•</span>
+                                        <div className="catalog-card-price-inline">
+                                            <span>Starting from ₹6000 Only</span>
+                                        </div>
+                                    </div>
+                                    <div className="catalog-meta-bottom-row">
+                                        <div className="catalog-info-item">
+                                            <FontAwesomeIcon icon={faBookOpen} className="catalog-info-icon" />
+                                            <span>48 Lessons</span>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div className="track-card-footer">
                                     <span className="track-status-badge badge-demanded">In Demand</span>
                                     <Link to="/enroll" className="track-enroll-btn btn-effect">
@@ -526,6 +544,24 @@ const Home = () => {
                                 <p className="track-desc">
                                     Direct client acquisition modeling, budget deployment strategies, and conversion tracking.
                                 </p>
+                                <div className="catalog-card-meta-block">
+                                    <div className="catalog-meta-top-row">
+                                        <div className="catalog-info-item">
+                                            <FontAwesomeIcon icon={faClock} className="catalog-info-icon" />
+                                            <span>8 Weeks</span>
+                                        </div>
+                                        <span className="catalog-meta-dot">•</span>
+                                        <div className="catalog-card-price-inline">
+                                            <span>Starting from ₹3000 Only</span>
+                                        </div>
+                                    </div>
+                                    <div className="catalog-meta-bottom-row">
+                                        <div className="catalog-info-item">
+                                            <FontAwesomeIcon icon={faBookOpen} className="catalog-info-icon" />
+                                            <span>24 Lessons</span>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div className="track-card-footer">
                                     <span className="track-status-badge badge-trending">Trending</span>
                                     <Link to="/enroll" className="track-enroll-btn btn-effect">
@@ -545,6 +581,24 @@ const Home = () => {
                                 <p className="track-desc">
                                    Professional training in corporate AI strategies and workflow automation.
                                 </p>
+                                <div className="catalog-card-meta-block">
+                                    <div className="catalog-meta-top-row">
+                                        <div className="catalog-info-item">
+                                            <FontAwesomeIcon icon={faClock} className="catalog-info-icon" />
+                                            <span>16 Weeks</span>
+                                        </div>
+                                        <span className="catalog-meta-dot">•</span>
+                                        <div className="catalog-card-price-inline">
+                                            <span>Starting from ₹6000 Only</span>
+                                        </div>
+                                    </div>
+                                    <div className="catalog-meta-bottom-row">
+                                        <div className="catalog-info-item">
+                                            <FontAwesomeIcon icon={faBookOpen} className="catalog-info-icon" />
+                                            <span>48 Lessons</span>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div className="track-card-footer">
                                     <span className="track-status-badge badge-popular">Most Popular</span>
                                     <Link to="/enroll" className="track-enroll-btn btn-effect">
@@ -564,6 +618,24 @@ const Home = () => {
                                 <p className="track-desc">
                                     Strategic brand positioning, distribution operations, and organic sentiment indexing.
                                 </p>
+                                <div className="catalog-card-meta-block">
+                                    <div className="catalog-meta-top-row">
+                                        <div className="catalog-info-item">
+                                            <FontAwesomeIcon icon={faClock} className="catalog-info-icon" />
+                                            <span>8 Weeks</span>
+                                        </div>
+                                        <span className="catalog-meta-dot">•</span>
+                                        <div className="catalog-card-price-inline">
+                                            <span>Starting from ₹2500 Only</span>
+                                        </div>
+                                    </div>
+                                    <div className="catalog-meta-bottom-row">
+                                        <div className="catalog-info-item">
+                                            <FontAwesomeIcon icon={faBookOpen} className="catalog-info-icon" />
+                                            <span>24 Lessons</span>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div className="track-card-footer">
                                     <span className="track-status-badge badge-seasonal">Seasonal</span>
                                     <Link to="/enroll" className="track-enroll-btn btn-effect">
@@ -583,6 +655,24 @@ const Home = () => {
                                 <p className="track-desc">
                                     Technical editing pipelines, compositing, and machine-assisted asset optimization.
                                 </p>
+                                <div className="catalog-card-meta-block">
+                                    <div className="catalog-meta-top-row">
+                                        <div className="catalog-info-item">
+                                            <FontAwesomeIcon icon={faClock} className="catalog-info-icon" />
+                                            <span>8 Weeks</span>
+                                        </div>
+                                        <span className="catalog-meta-dot">•</span>
+                                        <div className="catalog-card-price-inline">
+                                            <span>Starting from ₹3000 Only</span>
+                                        </div>
+                                    </div>
+                                    <div className="catalog-meta-bottom-row">
+                                        <div className="catalog-info-item">
+                                            <FontAwesomeIcon icon={faBookOpen} className="catalog-info-icon" />
+                                            <span>24 Lessons</span>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div className="track-card-footer">
                                     <span className="track-status-badge badge-trending">Trending</span>
                                     <Link to="/enroll" className="track-enroll-btn btn-effect">
@@ -602,6 +692,24 @@ const Home = () => {
                                 <p className="track-desc">
                                     Semantic search indexing, crawl architecture optimization, and competitive search modeling.
                                 </p>
+                                <div className="catalog-card-meta-block">
+                                    <div className="catalog-meta-top-row">
+                                        <div className="catalog-info-item">
+                                            <FontAwesomeIcon icon={faClock} className="catalog-info-icon" />
+                                            <span>8 Weeks</span>
+                                        </div>
+                                        <span className="catalog-meta-dot">•</span>
+                                        <div className="catalog-card-price-inline">
+                                            <span>Starting from ₹2500 Only</span>
+                                        </div>
+                                    </div>
+                                    <div className="catalog-meta-bottom-row">
+                                        <div className="catalog-info-item">
+                                            <FontAwesomeIcon icon={faBookOpen} className="catalog-info-icon" />
+                                            <span>24 Lessons</span>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div className="track-card-footer">
                                     <span className="track-status-badge badge-demanded">In Demand</span>
                                     <Link to="/enroll" className="track-enroll-btn btn-effect">
@@ -621,6 +729,24 @@ const Home = () => {
                                 <p className="track-desc">
                                     Design intuitive interfaces, interactive prototypes, and industry-standard design systems.
                                 </p>
+                                <div className="catalog-card-meta-block">
+                                    <div className="catalog-meta-top-row">
+                                        <div className="catalog-info-item">
+                                            <FontAwesomeIcon icon={faClock} className="catalog-info-icon" />
+                                            <span>12 Weeks</span>
+                                        </div>
+                                        <span className="catalog-meta-dot">•</span>
+                                        <div className="catalog-card-price-inline">
+                                            <span>Starting from ₹3000 Only</span>
+                                        </div>
+                                    </div>
+                                    <div className="catalog-meta-bottom-row">
+                                        <div className="catalog-info-item">
+                                            <FontAwesomeIcon icon={faBookOpen} className="catalog-info-icon" />
+                                            <span>36 Lessons</span>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div className="track-card-footer">
                                     <span className="track-status-badge badge-popular">Most Popular</span>
                                     <Link to="/enroll" className="track-enroll-btn btn-effect">
@@ -640,6 +766,24 @@ const Home = () => {
                                 <p className="track-desc">
                                     Build scalable modern web applications from frontend interfaces to powerful backend APIs.
                                 </p>
+                                <div className="catalog-card-meta-block">
+                                    <div className="catalog-meta-top-row">
+                                        <div className="catalog-info-item">
+                                            <FontAwesomeIcon icon={faClock} className="catalog-info-icon" />
+                                            <span>24 Weeks</span>
+                                        </div>
+                                        <span className="catalog-meta-dot">•</span>
+                                        <div className="catalog-card-price-inline">
+                                            <span>Starting from ₹6000 Only</span>
+                                        </div>
+                                    </div>
+                                    <div className="catalog-meta-bottom-row">
+                                        <div className="catalog-info-item">
+                                            <FontAwesomeIcon icon={faBookOpen} className="catalog-info-icon" />
+                                            <span>72 Lessons</span>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div className="track-card-footer">
                                     <span className="track-status-badge badge-demanded">In Demand</span>
                                     <Link to="/enroll" className="track-enroll-btn btn-effect">

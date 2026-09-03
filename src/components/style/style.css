@@ -59,12 +59,31 @@
    2. NAVBAR COMPONENT (DESKTOP BASE)
    -------------------------------------------------------------------------- */
 .main-header {
-  position: sticky;
+  position: relative;
   top: 0;
   z-index: 99;
   background-color: var(--primary-color);
   width: 100%;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+
+.main-header.is-sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  animation: navbarSlideDown 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes navbarSlideDown {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .navbar-container {
@@ -218,12 +237,28 @@
   top: 100%;
   left: 0;
   width: 100%;
+  max-height: calc(100vh - 84px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
   background: #fff;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   /* border-bottom: 3px solid var(--secondary-color); */
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75);
   animation: megaFadeDown 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   z-index: 98;
+}
+
+.desktop-mega-panel-wrapper::-webkit-scrollbar {
+  width: 6px;
+}
+
+.desktop-mega-panel-wrapper::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+.desktop-mega-panel-wrapper::-webkit-scrollbar-thumb {
+  background: var(--secondary-color);
+  border-radius: 4px;
 }
 
 @keyframes megaFadeDown {

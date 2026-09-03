@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import sailorCtaImg from "../assets/sailor-cta.jpg";
-
 import {
   faFacebookF,
   faTwitter,
@@ -36,35 +34,6 @@ const Footer = () => {
     return () => observer.disconnect();
   }, []);
   return (
-    <>
-    {/* 8. ENTERPRISE POTENTIAL CTA SECTION */}
-            <section className="cta-banner-section">
-                {/* Background Image Container with Green Overlay */}
-                <div
-                    className="cta-bg-image"
-                    style={{ backgroundImage: `url(${sailorCtaImg})` }}
-                />
-                <div className="cta-overlay" />
-
-                <div className="cta-container scroll-reveal">
-                    <h2 className="cta-title">
-                        Secure Your Enterprise <br />
-                        Potential Today
-                    </h2>
-                    <p className="cta-desc">
-                        Enrollment is open for the upcoming cohort. Apply online or request
-                        detailed program schedules from our professional advisory team.
-                    </p>
-                    <div className="cta-buttons-row">
-                        <Link to="/enroll" className="cta-primary-btn btn-effect">
-                            Submit Admission Request
-                        </Link>
-                        <Link to="/courses" className="cta-outline-btn btn-effect">
-                            Download Brochure
-                        </Link>
-                    </div>
-                </div>
-            </section>
     <footer className="main-footer">
       {/* Top Main Footer Section */}
       <div className="footer-top-container">
@@ -162,7 +131,6 @@ const Footer = () => {
         </div>
       </div>
     </footer>
-    </>
   );
 };
 

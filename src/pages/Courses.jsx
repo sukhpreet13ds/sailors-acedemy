@@ -42,6 +42,7 @@ const courseCategoriesData = [
         badge: "New",
         duration: "8 Weeks",
         lessons: "24 Lessons",
+        price: "₹3000",
         image: real4
       },
       {
@@ -50,6 +51,7 @@ const courseCategoriesData = [
         badge: "Trending",
         duration: "10 Weeks",
         lessons: "30 Lessons",
+        price: "₹6000",
         image: real1
       },
       {
@@ -58,6 +60,7 @@ const courseCategoriesData = [
         badge: "Most Popular",
         duration: "16 Weeks",
         lessons: "48 Lessons",
+        price: "₹6000",
         image: real2
       },
       {
@@ -66,6 +69,7 @@ const courseCategoriesData = [
         badge: "Advanced",
         duration: "12 Weeks",
         lessons: "36 Lessons",
+        price: "₹6000",
         image: real5
       },
       {
@@ -74,6 +78,7 @@ const courseCategoriesData = [
         badge: "Popular",
         duration: "6 Weeks",
         lessons: "18 Lessons",
+        price: "₹2500",
         image: real6
       },
       {
@@ -82,6 +87,7 @@ const courseCategoriesData = [
         badge: "Trending",
         duration: "4 Weeks",
         lessons: "12 Lessons",
+        price: "₹2500",
         image: real3
       }
     ]
@@ -94,6 +100,7 @@ const courseCategoriesData = [
         desc: "Build modern full-stack web applications from UI to scalable backend APIs.",
         badge: "Popular",
         duration: "24 Weeks",
+        price: "₹6000",
         lessons: "72 Lessons"
       },
       {
@@ -101,6 +108,7 @@ const courseCategoriesData = [
         desc: "Master MongoDB, Express.js, React.js, and Node.js for modern web apps.",
         badge: "Popular",
         duration: "16 Weeks",
+        price: "₹2500",
         lessons: "48 Lessons"
       },
       {
@@ -108,6 +116,7 @@ const courseCategoriesData = [
         desc: "Learn core Python programming, data structures, and Django framework.",
         badge: "Trending",
         duration: "12 Weeks",
+        price: "₹2500",
         lessons: "36 Lessons"
       },
       {
@@ -115,6 +124,7 @@ const courseCategoriesData = [
         desc: "Learn Core, Advanced Java, Spring Boot, and enterprise microservices.",
         badge: "Advanced",
         duration: "14 Weeks",
+        price: "₹2500",
         lessons: "42 Lessons"
       },
       {
@@ -122,6 +132,7 @@ const courseCategoriesData = [
         desc: "Gain hands-on practical web development experience on live client projects.",
         badge: "Internship",
         duration: "12 Weeks",
+        price: "₹4500",
         lessons: "36 Lessons"
       },
       {
@@ -129,6 +140,7 @@ const courseCategoriesData = [
         desc: "Build real-world full-stack products with complete agency mentorship.",
         badge: "Internship",
         duration: "24 Weeks",
+        price: "₹8000",
         lessons: "72 Lessons"
       }
     ]
@@ -486,15 +498,24 @@ const Courses = () => {
                                     </div>
 
                                     <div>
-                                        {/* Duration & Lessons Row */}
-                                        <div className="catalog-card-info-row">
-                                            <div className="catalog-info-item">
-                                                <FontAwesomeIcon icon={faClock} className="catalog-info-icon" />
-                                                <span>{course.duration}</span>
+                                        {/* Duration, Price & Lessons */}
+                                        <div className="catalog-card-meta-block">
+                                            <div className="catalog-meta-top-row">
+                                                <div className="catalog-info-item">
+                                                    <FontAwesomeIcon icon={faClock} className="catalog-info-icon" />
+                                                    <span>{course.duration}</span>
+                                                </div>
+                                                <span className="catalog-meta-dot">•</span>
+                                                <div className="catalog-card-price-inline">
+                                                    <span>Starting from {course.price || "₹3000"} Only</span>
+                                                </div>
                                             </div>
-                                            <div className="catalog-info-item">
-                                                <FontAwesomeIcon icon={faBookOpen} className="catalog-info-icon" />
-                                                <span>{course.lessons}</span>
+
+                                            <div className="catalog-meta-bottom-row">
+                                                <div className="catalog-info-item">
+                                                    <FontAwesomeIcon icon={faBookOpen} className="catalog-info-icon" />
+                                                    <span>{course.lessons}</span>
+                                                </div>
                                             </div>
                                         </div>
 
