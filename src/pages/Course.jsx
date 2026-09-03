@@ -57,6 +57,12 @@ const Course = () => {
               </div>
             </div>
 
+            {/* Price Banner Below Image */}
+            <div className="course-hero-price-tag scroll-reveal">
+              <span className="course-price-label">Starting from</span>
+              <span className="course-price-amount">₹3000 Only</span>
+            </div>
+
             {/* Title & Desc */}
             <h1 className="course-hero-main-title scroll-reveal">
               Generative AI & <br />
