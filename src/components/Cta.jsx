@@ -15,7 +15,8 @@ const Cta = ({
   primaryBtnText = "Submit Admission Request",
   secondaryBtnText = "Download Brochure",
   primaryBtnLink = "/enroll",
-  secondaryBtnLink = "/courses"
+  secondaryBtnLink = "/courses",
+  onPrimaryClick = null
 }) => {
   useEffect(() => {
     const observerCallback = (entries, observer) => {
@@ -51,12 +52,26 @@ const Cta = ({
         <h2 className="cta-title">{title}</h2>
         <p className="cta-desc">{description}</p>
         <div className="cta-buttons-row">
-          <Link to={primaryBtnLink} className="cta-primary-btn btn-effect">
-            {primaryBtnText}
-          </Link>
-          <Link to={secondaryBtnLink} className="cta-outline-btn btn-effect">
-            {secondaryBtnText}
-          </Link>
+          {primaryBtnText && (
+            onPrimaryClick ? (
+              <button
+                type="button"
+                onClick={onPrimaryClick}
+                className="cta-primary-btn btn-effect"
+              >
+                {primaryBtnText}
+              </button>
+            ) : (
+              <Link to={primaryBtnLink} className="cta-primary-btn btn-effect">
+                {primaryBtnText}
+              </Link>
+            )
+          )}
+          {secondaryBtnText && (
+            <Link to={secondaryBtnLink} className="cta-outline-btn btn-effect">
+              {secondaryBtnText}
+            </Link>
+          )}
         </div>
       </div>
     </section>

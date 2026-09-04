@@ -80,6 +80,7 @@
     transform: translateY(-100%);
     opacity: 0;
   }
+
   100% {
     transform: translateY(0);
     opacity: 1;
@@ -246,19 +247,14 @@
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75);
   animation: megaFadeDown 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   z-index: 98;
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 .desktop-mega-panel-wrapper::-webkit-scrollbar {
-  width: 6px;
-}
-
-.desktop-mega-panel-wrapper::-webkit-scrollbar-track {
-  background: #f1f5f9;
-}
-
-.desktop-mega-panel-wrapper::-webkit-scrollbar-thumb {
-  background: var(--secondary-color);
-  border-radius: 4px;
+  display: none;
 }
 
 @keyframes megaFadeDown {
@@ -266,6 +262,7 @@
     opacity: 0;
     transform: translateY(-10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -273,9 +270,9 @@
 }
 
 .desktop-mega-panel {
-  max-width: 1840px;
+  max-width: 1900px;
   margin: 0 auto;
-  padding: 28px 28px 20px;
+  padding: 20px 20px 20px;
 }
 
 .mega-panel-inner {
@@ -299,7 +296,7 @@
 .mega-column {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 4px;
 }
 
 .mega-column-header {
@@ -342,9 +339,9 @@
 }
 
 .mega-item-name {
-  color: #000000;
+  color: var(--primary-color);
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 600;
   font-family: var(--font-work-sans);
   transition: color 0.2s ease;
   line-height: 1.35;
@@ -612,7 +609,7 @@
 
 .banner-subtext {
   color: #f3f4f6;
-  font-size: 12.5px;
+  font-size: 16px;
   font-weight: 500;
   margin: 2px 0 0;
   max-width: 100%;
@@ -1237,26 +1234,17 @@
   }
 
   .desktop-mega-panel-wrapper::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  .desktop-mega-panel-wrapper::-webkit-scrollbar-track {
-    background: #f1f5f9;
-  }
-
-  .desktop-mega-panel-wrapper::-webkit-scrollbar-thumb {
-    background: var(--secondary-color);
-    border-radius: 4px;
+    display: none;
   }
 
   .desktop-mega-panel {
-    padding: 24px 20px 24px;
+    padding: 20px 15px 24px;
     max-width: 100%;
   }
 
   .mega-panel-inner {
     grid-template-columns: repeat(6, minmax(0, 1fr));
-    gap: 14px;
+    gap: 4px;
   }
 
   .mega-column-title {
@@ -1326,17 +1314,7 @@
   }
 
   .desktop-mega-panel-wrapper::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
-
-  .desktop-mega-panel-wrapper::-webkit-scrollbar-track {
-    background: #f1f5f9;
-  }
-
-  .desktop-mega-panel-wrapper::-webkit-scrollbar-thumb {
-    background: var(--secondary-color);
-    border-radius: 4px;
+    display: none;
   }
 
   .desktop-mega-panel {
@@ -1598,6 +1576,7 @@
     justify-content: center;
     gap: 14px;
   }
+  .footer-logo-img {
+height: 76px;
+  }
 }
-
-

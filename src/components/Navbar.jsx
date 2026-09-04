@@ -433,11 +433,11 @@ const Navbar = () => {
           </li>
           <li className="nav-item">
             <Link
-              to="/student-life"
+              to="/contact-us"
               className={`nav-link ${location.pathname === "/student-life" ? "active" : ""}`}
               onClick={closeAllMenus}
             >
-              STUDENT LIFE
+              CONTACT US
             </Link>
           </li>
         </ul>
@@ -695,7 +695,7 @@ const Navbar = () => {
 
             {/* Student Life */}
             <Link
-              to="/student-life"
+              to="/contact-us"
               className={`mobile-nav-item ${location.pathname === "/student-life" ? "active" : ""}`}
               onClick={closeAllMenus}
             >
@@ -703,7 +703,7 @@ const Navbar = () => {
                 <div className="mobile-icon-box">
                   <FontAwesomeIcon icon={faPeopleGroup} />
                 </div>
-                <span className="mobile-item-label">Student Life</span>
+                <span className="mobile-item-label">Contact Us</span>
               </div>
             </Link>
 

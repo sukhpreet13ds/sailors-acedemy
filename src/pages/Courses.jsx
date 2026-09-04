@@ -135,7 +135,7 @@ const courseCategoriesData = [
         price: "₹4500",
         lessons: "36 Lessons"
       },
-      {
+      { 
         name: "Full Stack Development Internship",
         desc: "Build real-world full-stack products with complete agency mentorship.",
         badge: "Internship",
